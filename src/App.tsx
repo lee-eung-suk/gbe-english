@@ -55,38 +55,41 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col font-sans">
+    <div className="min-h-screen flex flex-col font-sans break-keep selection:bg-violet-100 selection:text-violet-900">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo & Title */}
             <div 
               className="flex items-center gap-3 cursor-pointer group" 
               onClick={() => setCurrentPage('main')}
-              title="홈으로 이동"
             >
-              <img 
-                src="https://i.imgur.com/OYDYlXa.png" 
-                alt="경북교육청 로고" 
-                className="h-12 object-contain transition-transform group-hover:scale-105"
-                referrerPolicy="no-referrer"
-              />
+              <div className="p-2 bg-violet-50 rounded-xl group-hover:bg-violet-100 transition-colors">
+                <img 
+                  src="https://i.imgur.com/OYDYlXa.png" 
+                  alt="경북교육청 로고" 
+                  className="h-10 object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-black group-hover:text-[#7C3AED] transition-colors">
-                  2026 1학기 원어민과 함께하는 북클럽
+                <span className="text-base md:text-lg font-bold text-gray-900 tracking-tight">
+                  경북교육청 원어민 북클럽
                 </span>
               </div>
             </div>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-1">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => setCurrentPage(item.id as Page)}
-                  className={`text-lg font-bold transition-colors ${
-                    currentPage === item.id ? 'text-[#7C3AED]' : 'text-gray-600 hover:text-[#7C3AED]'
+                  className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                    currentPage === item.id 
+                      ? 'bg-violet-50 text-violet-700' 
+                      : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
                   }`}
                 >
                   {item.label}
@@ -96,10 +99,10 @@ export default function App() {
 
             {/* Mobile Menu Toggle */}
             <button 
-              className="md:hidden p-2 text-gray-600"
+              className="md:hidden p-2 text-gray-500 hover:bg-gray-50 rounded-xl transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -108,12 +111,12 @@ export default function App() {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white border-t overflow-hidden"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
             >
-              <div className="px-4 py-6 flex flex-col gap-4">
+              <div className="px-4 py-6 flex flex-col gap-2">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
@@ -121,11 +124,13 @@ export default function App() {
                       setCurrentPage(item.id as Page);
                       setIsMenuOpen(false);
                     }}
-                    className={`flex items-center gap-3 p-3 rounded-xl text-lg font-bold ${
-                      currentPage === item.id ? 'bg-[#7C3AED]/10 text-[#7C3AED]' : 'text-gray-600'
+                    className={`flex items-center gap-3 p-4 rounded-2xl text-base font-semibold transition-colors ${
+                      currentPage === item.id 
+                        ? 'bg-violet-50 text-violet-700' 
+                        : 'text-gray-600 hover:bg-gray-50'
                     }`}
                   >
-                    <item.icon size={20} />
+                    <item.icon size={20} className={currentPage === item.id ? 'text-violet-600' : 'text-gray-400'} />
                     {item.label}
                   </button>
                 ))}
@@ -141,175 +146,158 @@ export default function App() {
           {currentPage === 'main' && (
             <motion.div
               key="main"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
             >
               {/* Hero Section */}
-              <section className="relative h-[650px] flex items-center justify-center overflow-hidden bg-[#FFD700]">
-                {/* Background Image */}
+              <section className="relative min-h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden bg-white">
+                {/* Background Image with Overlay */}
                 <div className="absolute inset-0 z-0">
                   <img 
                     src="https://i.imgur.com/Hry0vzI.png" 
                     alt="Main Background" 
-                    className="w-full h-full object-cover opacity-60"
+                    className="w-full h-full object-cover opacity-30"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FFD700]/20 to-[#F3E8FF]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-violet-50/30 via-white/40 to-white"></div>
                 </div>
 
-                {/* Floating Decorative Icons */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                  {[
-                    { Icon: Pencil, color: "text-blue-400", top: "15%", left: "10%", delay: 0 },
-                    { Icon: Languages, color: "text-pink-400", top: "20%", right: "15%", delay: 1 },
-                    { Icon: GraduationCap, color: "text-green-400", bottom: "25%", left: "15%", delay: 0.5 },
-                    { Icon: Sparkles, color: "text-orange-400", top: "40%", right: "8%", delay: 1.5 },
-                    { Icon: Music, color: "text-red-400", bottom: "15%", right: "20%", delay: 2 },
-                    { Icon: Palette, color: "text-purple-400", top: "10%", right: "30%", delay: 0.8 },
-                    { Icon: Lightbulb, color: "text-yellow-500", bottom: "30%", right: "40%", delay: 1.2 },
-                    { Icon: Star, color: "text-white", top: "50%", left: "5%", delay: 0.3 },
-                  ].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ y: 0, rotate: 0 }}
-                      animate={{ 
-                        y: [0, -30, 0],
-                        rotate: [0, 15, -15, 0]
-                      }}
-                      transition={{ 
-                        duration: 4 + Math.random() * 2, 
-                        repeat: Infinity, 
-                        delay: item.delay,
-                        ease: "easeInOut"
-                      }}
-                      className={`absolute ${item.color} opacity-40`}
-                      style={{ 
-                        top: item.top, 
-                        left: item.left, 
-                        right: item.right, 
-                        bottom: item.bottom 
-                      }}
-                    >
-                      <item.Icon size={48 + Math.random() * 24} />
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className="relative z-10 text-center px-4">
+                <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
                   <motion.div
-                    initial={{ y: -50, opacity: 0 }}
+                    initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    className="inline-block mb-4 px-6 py-2 bg-white/80 backdrop-blur-sm rounded-full text-[#7C3AED] font-bold shadow-sm"
+                    transition={{ delay: 0.2 }}
+                    className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 bg-violet-50 rounded-full text-violet-700 text-sm font-bold border border-violet-100"
                   >
-                    ✨ 2026 1학기 원어민과 함께하는 북클럽 ✨
+                    <Sparkles size={16} /> 2026 1학기 원어민과 함께하는 북클럽
                   </motion.div>
                   <motion.h1 
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="title-font text-5xl md:text-7xl font-bold text-[#7C3AED] mb-6 drop-shadow-xl"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-8 leading-[1.15] tracking-tight"
                   >
-                    2026 1학기<br />원어민과 함께하는 북클럽
+                    메타버스 세상에서 펼쳐지는<br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">
+                      신나는 영어 모험!
+                    </span>
                   </motion.h1>
-                  <p className="text-xl md:text-2xl text-[#7C3AED] font-bold mb-10 bg-white/30 backdrop-blur-[2px] inline-block px-4 py-1 rounded-lg">
-                    메타버스 세상에서 펼쳐지는 신나는 영어 모험! 🚀
-                  </p>
-                  <div className="flex flex-wrap justify-center gap-4">
-                    <button onClick={() => setCurrentPage('registration')} className="btn-primary text-xl px-10 py-4 shadow-2xl hover:scale-105 transition-transform">
+                  <motion.p 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed"
+                  >
+                    원어민 선생님과 함께 책을 읽으며 꿈을 키워보세요.<br className="hidden md:block" />
+                    경북교육청이 제안하는 새로운 차원의 영어 학습 경험.
+                  </motion.p>
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="flex flex-col sm:flex-row justify-center gap-4"
+                  >
+                    <button onClick={() => setCurrentPage('registration')} className="btn-primary text-lg">
                       지금 바로 신청하기
                     </button>
                     <a 
                       href="https://zep.us/play/6PE6n5" 
                       target="_blank" 
                       rel="noreferrer"
-                      className="btn-secondary text-xl px-10 py-4 flex items-center gap-2 shadow-2xl hover:scale-105 transition-transform"
+                      className="btn-secondary text-lg flex items-center justify-center gap-2"
                     >
-                      ZEP 체험하기 <ExternalLink size={20} />
+                      ZEP 체험하기 <ExternalLink size={18} />
                     </a>
-                  </div>
+                  </motion.div>
                 </div>
               </section>
 
               {/* Intro Details Section */}
-              <section className="py-20 bg-[#F3E8FF]">
-                <div className="max-w-7xl mx-auto px-4">
-                  <div className="space-y-12">
-                    <h3 className="title-font text-3xl font-bold text-[#7C3AED] text-center mb-12">수업 현장 미리보기</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl mx-auto">
-                      {[
-                        { id: "1WVPAXoTNwA", caption: "메타버스 수업 현장 #1" },
-                        { id: "uZkom_f1-N4", caption: "메타버스 수업 현장 #2" }
-                      ].map((item, idx) => (
-                        <div key={idx} className="flex flex-col">
-                          <div className="aspect-video w-full rounded-[3rem] shadow-2xl overflow-hidden border-8 border-white bg-black relative group">
-                            <iframe 
-                              className="w-full h-full"
-                              src={`https://www.youtube.com/embed/${item.id}?autoplay=1&mute=1&loop=1&playlist=${item.id}`}
-                              title={`YouTube video player ${idx + 1}`}
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                              allowFullScreen
-                            ></iframe>
-                          </div>
-                          <p className="mt-8 text-center text-[#7C3AED] text-2xl font-bold">
-                            {item.caption}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div className="flex flex-col lg:flex-row items-center gap-12 pt-12">
-                      <div className="flex-1 space-y-6">
-                        <h2 className="title-font text-4xl font-bold text-[#7C3AED]">원어민과 함께하는 북클럽 소개</h2>
-                        <div className="bg-white p-8 rounded-3xl shadow-lg space-y-6">
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 bg-[#7C3AED]/10 rounded-2xl text-[#7C3AED]">
-                              <Calendar size={24} />
-                            </div>
-                            <div>
-                              <p className="font-bold text-lg">신청 기간</p>
-                              <p className="text-gray-600">2026. 05. 01 ~ 2026. 05. 08</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 bg-[#7C3AED]/10 rounded-2xl text-[#7C3AED]">
-                              <BookOpen size={24} />
-                            </div>
-                            <div>
-                              <p className="font-bold text-lg">교육 기간</p>
-                              <p className="text-gray-600">2026. 05. 26 ~ 2026. 06. 11</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-4">
-                            <div className="p-3 bg-[#7C3AED]/10 rounded-2xl text-[#7C3AED]">
-                              <UserPlus size={24} />
-                            </div>
-                            <div>
-                              <p className="font-bold text-lg">모집 인원</p>
-                              <p className="text-gray-600">클래스당 13명</p>
-                            </div>
-                          </div>
-                        </div>
-                        <button onClick={() => setCurrentPage('registration')} className="btn-primary w-full py-4 text-xl">
-                          지금 바로 수강 신청하러 가기 <ChevronRight className="inline ml-2" />
-                        </button>
+              <section className="py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div className="space-y-10">
+                      <div className="space-y-4">
+                        <h2 className="text-3xl md:text-4xl font-black text-gray-900 leading-tight">
+                          원어민과 함께하는<br />북클럽을 소개합니다
+                        </h2>
+                        <p className="text-lg text-gray-600">
+                          체계적인 커리큘럼과 즐거운 활동이 가득한 북클럽에서<br />
+                          영어 실력과 창의력을 동시에 키워보세요.
+                        </p>
                       </div>
-                      <div className="flex-1">
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.5 }}
-                          className="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white"
-                        >
-                          <img 
-                            src="https://i.imgur.com/GPxdL1d.png" 
-                            alt="북클럽 소개 이미지" 
-                            className="w-full h-auto object-cover"
-                            referrerPolicy="no-referrer"
-                          />
-                        </motion.div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {[
+                          { icon: Calendar, label: "신청 기간", value: "2026. 05. 01 ~ 05. 08", color: "bg-blue-50 text-blue-600" },
+                          { icon: BookOpen, label: "교육 기간", value: "2026. 05. 26 ~ 06. 11", color: "bg-violet-50 text-violet-600" },
+                          { icon: UserPlus, label: "모집 인원", value: "클래스당 13명", color: "bg-emerald-50 text-emerald-600" },
+                          { icon: Users, label: "교육 대상", value: "초등학생 및 중학생", color: "bg-orange-50 text-orange-600" },
+                        ].map((info, idx) => (
+                          <div key={idx} className="p-6 rounded-2xl bg-gray-50/50 border border-gray-100 space-y-3">
+                            <div className={`w-10 h-10 rounded-xl ${info.color} flex items-center justify-center`}>
+                              <info.icon size={20} />
+                            </div>
+                            <div>
+                              <p className="text-sm font-bold text-gray-400 mb-1">{info.label}</p>
+                              <p className="text-base font-bold text-gray-900">{info.value}</p>
+                            </div>
+                          </div>
+                        ))}
                       </div>
+
+                      <button onClick={() => setCurrentPage('registration')} className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2">
+                        수강 신청하러 가기 <ChevronRight size={18} />
+                      </button>
                     </div>
+
+                    <div className="relative">
+                      <div className="absolute -inset-4 bg-violet-100 rounded-[3rem] rotate-3 -z-10"></div>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white"
+                      >
+                        <img 
+                          src="https://i.imgur.com/GPxdL1d.png" 
+                          alt="북클럽 소개 이미지" 
+                          className="w-full h-auto object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </motion.div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Video Preview Section */}
+              <section className="py-24 bg-gray-50">
+                <div className="max-w-7xl mx-auto px-6">
+                  <div className="text-center mb-16 space-y-4">
+                    <h2 className="text-3xl md:text-4xl font-black text-gray-900">수업 현장 미리보기</h2>
+                    <p className="text-gray-600 text-lg">메타버스 공간에서 진행되는 생생한 수업 모습을 확인하세요.</p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {[
+                      { id: "1WVPAXoTNwA", title: "메타버스 수업 현장 #1" },
+                      { id: "uZkom_f1-N4", title: "메타버스 수업 현장 #2" }
+                    ].map((item, idx) => (
+                      <div key={idx} className="space-y-4">
+                        <div className="aspect-video w-full rounded-2xl shadow-lg overflow-hidden bg-black border border-gray-200">
+                          <iframe 
+                            className="w-full h-full"
+                            src={`https://www.youtube.com/embed/${item.id}?autoplay=1&mute=1&loop=1&playlist=${item.id}&rel=0`}
+                            title={item.title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                          ></iframe>
+                        </div>
+                        <p className="text-lg font-bold text-gray-900 text-center">{item.title}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </section>
@@ -319,43 +307,58 @@ export default function App() {
           {currentPage === 'notice' && (
             <motion.div
               key="notice"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="max-w-4xl mx-auto px-4 py-16"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="max-w-4xl mx-auto px-6 py-20"
             >
-              <h2 className="title-font text-5xl text-center font-bold text-[#7C3AED] mb-12">공지 사항</h2>
-              <div className="bg-white rounded-[2.5rem] shadow-xl p-10 md:p-16 border-2 border-[#7C3AED]/10 space-y-12">
-                <section className="space-y-4">
-                  <h3 className="text-2xl font-bold text-[#7C3AED] flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-[#7C3AED] text-white flex items-center justify-center text-sm">1</span>
-                    수강신청 결과 안내
-                  </h3>
-                  <div className="pl-11 space-y-2 text-lg">
-                    <p><span className="font-bold text-gray-700">안내문자 발송:</span> 수강 신청 완료된 다음날 문자로 개별 통보</p>
-                    <p><span className="font-bold text-gray-700">문자 발송 대상:</span> 수강 대상 학생 및 보호자</p>
-                  </div>
-                </section>
+              <div className="text-center mb-16 space-y-4">
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900">공지 사항</h2>
+                <p className="text-gray-600 text-lg">북클럽 운영에 관한 중요 안내 사항입니다.</p>
+              </div>
 
-                <section className="space-y-4">
-                  <h3 className="text-2xl font-bold text-[#7C3AED] flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-[#7C3AED] text-white flex items-center justify-center text-sm">2</span>
-                    수업 참가 전 '오리엔테이션' 실시
-                  </h3>
-                  <div className="pl-11 space-y-2 text-lg">
-                    <p><span className="font-bold text-gray-700">오리엔테이션 기간:</span> 추후 통보</p>
-                    <p><span className="font-bold text-gray-700">시간:</span> 수업 담당교사가 사전에 개별 연락하여 정함</p>
-                    <p><span className="font-bold text-gray-700">방법:</span> 북클럽 수업교실 접속(온라인 플랫폼 ZEP)</p>
-                    <p><span className="font-bold text-gray-700">내용:</span> 수업 진행에 대한 전반적인 안내</p>
+              <div className="space-y-6">
+                {[
+                  {
+                    title: "수강신청 결과 안내",
+                    content: [
+                      { label: "안내문자 발송", text: "수강 신청 완료된 다음날 문자로 개별 통보" },
+                      { label: "문자 발송 대상", text: "수강 대상 학생 및 보호자" }
+                    ]
+                  },
+                  {
+                    title: "수업 참가 전 '오리엔테이션' 실시",
+                    content: [
+                      { label: "오리엔테이션 기간", text: "추후 통보" },
+                      { label: "시간", text: "수업 담당교사가 사전에 개별 연락하여 정함" },
+                      { label: "방법", text: "북클럽 수업교실 접속(온라인 플랫폼 ZEP)" },
+                      { label: "내용", text: "수업 진행에 대한 전반적인 안내" }
+                    ]
+                  },
+                  {
+                    title: "수업 실시 후 '만족도 조사' 참가 협조",
+                    content: []
+                  }
+                ].map((notice, idx) => (
+                  <div key={idx} className="card-premium p-8 md:p-10 flex gap-6 items-start">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-violet-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-violet-200">
+                      {idx + 1}
+                    </div>
+                    <div className="space-y-4">
+                      <h3 className="text-xl md:text-2xl font-black text-gray-900">{notice.title}</h3>
+                      {notice.content.length > 0 && (
+                        <div className="space-y-3">
+                          {notice.content.map((item, i) => (
+                            <div key={i} className="flex flex-col sm:flex-row sm:gap-3 text-base md:text-lg">
+                              <span className="font-bold text-gray-900 min-w-[140px]">{item.label}:</span>
+                              <span className="text-gray-600">{item.text}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </section>
-
-                <section className="space-y-4">
-                  <h3 className="text-2xl font-bold text-[#7C3AED] flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-[#7C3AED] text-white flex items-center justify-center text-sm">3</span>
-                    수업 실시 후 '만족도 조사' 참가 협조
-                  </h3>
-                </section>
+                ))}
               </div>
             </motion.div>
           )}
@@ -363,27 +366,34 @@ export default function App() {
           {currentPage === 'registration' && (
             <motion.div
               key="registration"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              className="max-w-7xl mx-auto px-4 py-16"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="max-w-7xl mx-auto px-6 py-20"
             >
-              <h2 className="title-font text-5xl text-center font-bold text-[#7C3AED] mb-12">수강 신청</h2>
+              <div className="text-center mb-16 space-y-4">
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900">수강 신청</h2>
+                <p className="text-gray-600 text-lg">자신의 수준에 맞는 책을 선택하여 신청해 주세요.</p>
+              </div>
               
               {/* Tabs */}
-              <div className="flex justify-center gap-4 mb-12">
+              <div className="flex justify-center p-1.5 bg-gray-100 rounded-2xl w-fit mx-auto mb-12">
                 <button 
                   onClick={() => { setRegCategory('elementary'); setRegLevel('전체'); }}
-                  className={`px-10 py-4 rounded-2xl text-xl font-bold transition-all ${
-                    regCategory === 'elementary' ? 'bg-[#7C3AED] text-white shadow-lg scale-105' : 'bg-white text-gray-500 hover:bg-gray-50'
+                  className={`px-8 py-3 rounded-xl text-base font-bold transition-all ${
+                    regCategory === 'elementary' 
+                      ? 'bg-white text-violet-700 shadow-sm' 
+                      : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
                   초등 신청
                 </button>
                 <button 
                   onClick={() => { setRegCategory('middle'); setRegLevel('전체'); }}
-                  className={`px-10 py-4 rounded-2xl text-xl font-bold transition-all ${
-                    regCategory === 'middle' ? 'bg-[#7C3AED] text-white shadow-lg scale-105' : 'bg-white text-gray-500 hover:bg-gray-50'
+                  className={`px-8 py-3 rounded-xl text-base font-bold transition-all ${
+                    regCategory === 'middle' 
+                      ? 'bg-white text-violet-700 shadow-sm' 
+                      : 'text-gray-500 hover:text-gray-700'
                   }`}
                 >
                   중등 신청
@@ -391,80 +401,90 @@ export default function App() {
               </div>
 
               {/* Filters */}
-              <div className="flex flex-wrap justify-center gap-3 mb-12">
+              <div className="flex justify-center gap-1.5 sm:gap-3 mb-16 overflow-x-auto no-scrollbar py-2">
                 {['전체', '상', '중', '하'].map((level) => (
                   <button
                     key={level}
                     onClick={() => setRegLevel(level as any)}
-                    className={`px-6 py-2 rounded-full font-bold border-2 transition-all ${
+                    className={`whitespace-nowrap px-3.5 py-2 sm:px-6 sm:py-2 rounded-full text-xs sm:text-sm font-bold transition-all border shrink-0 ${
                       regLevel === level 
-                        ? 'bg-[#FFD700] border-[#FFD700] text-[#7C3AED]' 
-                        : 'bg-white border-gray-200 text-gray-500 hover:border-[#FFD700]'
+                        ? 'bg-violet-600 border-violet-600 text-white shadow-lg shadow-violet-100' 
+                        : 'bg-white border-gray-200 text-gray-500 hover:border-violet-300 hover:text-violet-600'
                     }`}
                   >
-                    수준: {level}
+                    {level === '전체' ? '전체 보기' : `수준: ${level}`}
                   </button>
                 ))}
               </div>
 
               {/* Class Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {filteredClasses.map((item) => (
-                  <motion.div
-                    layout
-                    key={item.id}
-                    className="bg-white rounded-3xl shadow-lg overflow-hidden border-2 border-transparent hover:border-[#7C3AED] transition-all group"
-                  >
-                    <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
-                      <img 
-                        src={item.image} 
-                        alt={item.title} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        referrerPolicy="no-referrer"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className={`px-4 py-1 rounded-full text-sm font-bold text-white shadow-md ${
-                          item.level === '상' ? 'bg-[#EF4444]' : item.level === '중' ? 'bg-[#3B82F6]' : 'bg-[#10B981]'
-                        }`}>
-                          수준: {item.level}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-6 space-y-4">
-                      <div className="space-y-1">
-                        <p className="text-sm font-bold text-[#7C3AED]">{item.target}</p>
-                        <h3 className="text-lg font-bold text-gray-800 line-clamp-2 h-14">{item.title}</h3>
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <a 
-                          href={item.previewUrl} 
-                          target="_blank" 
-                          rel="noreferrer"
-                          className="flex items-center justify-center gap-2 py-2 rounded-xl bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors"
-                        >
-                          <PlayCircle size={18} /> 미리보기
-                        </a>
-                        <div className="grid grid-cols-2 gap-2">
-                          <button className={`py-3 rounded-xl text-white font-bold transition-colors shadow-md text-sm ${
-                            item.level === '상' ? 'bg-[#EF4444] hover:bg-[#DC2626]' : item.level === '중' ? 'bg-[#3B82F6] hover:bg-[#2563EB]' : 'bg-[#10B981] hover:bg-[#059669]'
+                <AnimatePresence mode="popLayout">
+                  {filteredClasses.map((item) => (
+                    <motion.div
+                      layout
+                      key={item.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      className="card-premium group overflow-hidden flex flex-col"
+                    >
+                      <div className="relative aspect-[3/4] overflow-hidden bg-gray-50">
+                        <img 
+                          src={item.image} 
+                          alt={item.title} 
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className={`px-3 py-1 rounded-lg text-xs font-black text-white shadow-lg ${
+                            item.level === '상' ? 'bg-rose-500' : item.level === '중' ? 'bg-blue-500' : 'bg-emerald-500'
                           }`}>
-                            A반 신청
-                          </button>
-                          <button className={`py-3 rounded-xl text-white font-bold transition-colors shadow-md text-sm ${
-                            item.level === '상' ? 'bg-[#EF4444] hover:bg-[#DC2626]' : item.level === '중' ? 'bg-[#3B82F6] hover:bg-[#2563EB]' : 'bg-[#10B981] hover:bg-[#059669]'
-                          }`}>
-                            B반 신청
-                          </button>
+                            수준: {item.level}
+                          </span>
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
+                      <div className="p-6 flex-grow flex flex-col space-y-4">
+                        <div className="space-y-2">
+                          <p className="text-xs font-bold text-violet-600 uppercase tracking-wider">{item.target}</p>
+                          <h3 className="text-lg font-black text-gray-900 line-clamp-2 leading-snug h-14">
+                            {item.title}
+                          </h3>
+                        </div>
+                        <div className="pt-4 space-y-2 mt-auto">
+                          <a 
+                            href={item.previewUrl} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gray-50 text-gray-600 text-sm font-bold hover:bg-gray-100 transition-colors border border-gray-100"
+                          >
+                            <PlayCircle size={16} /> 미리보기
+                          </a>
+                          <div className="grid grid-cols-2 gap-2">
+                            <button className={`py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 ${
+                              item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
+                            }`}>
+                              A반 신청
+                            </button>
+                            <button className={`py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 ${
+                              item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
+                            }`}>
+                              B반 신청
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
               </div>
 
               {filteredClasses.length === 0 && (
-                <div className="text-center py-20 text-gray-500">
-                  해당 조건의 클래스가 없습니다.
+                <div className="text-center py-32 space-y-4">
+                  <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto text-gray-300">
+                    <BookOpen size={40} />
+                  </div>
+                  <p className="text-gray-400 text-lg font-medium">해당 조건의 클래스가 없습니다.</p>
                 </div>
               )}
             </motion.div>
@@ -476,49 +496,55 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="max-w-5xl mx-auto px-4 py-16"
+              className="max-w-7xl mx-auto px-6 py-20"
             >
-              <h2 className="title-font text-5xl text-center font-bold text-[#7C3AED] mb-12">체험하기</h2>
+              <div className="text-center mb-16 space-y-4">
+                <h2 className="text-4xl md:text-5xl font-black text-gray-900">체험하기</h2>
+                <p className="text-gray-600 text-lg">메타버스 교실에 직접 접속하여 환경을 미리 체험해 보세요.</p>
+              </div>
               
-              <div className="mb-20 flex flex-col lg:flex-row items-center justify-center gap-8 bg-white/50 p-8 rounded-[4rem] border-4 border-white shadow-xl max-w-6xl mx-auto">
-                <div className="w-full lg:w-1/2 rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
+              <div className="card-premium p-8 md:p-12 flex flex-col lg:flex-row items-center gap-12 mb-20">
+                <div className="w-full lg:w-1/2 rounded-3xl overflow-hidden shadow-xl border border-gray-100">
                   <img 
                     src="https://i.imgur.com/Hry0vzI.png" 
                     alt="ZEP Metaverse Preview" 
-                    className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
+                    className="w-full h-auto object-cover hover:scale-105 transition-transform duration-1000"
                     referrerPolicy="no-referrer"
                   />
                 </div>
-                <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start gap-6">
-                  <div className="text-center lg:text-left">
-                    <h3 className="text-3xl font-bold text-[#7C3AED] mb-2">메타버스 교실 입장하기</h3>
-                    <p className="text-gray-600 text-lg">원어민 선생님과 친구들이 기다리고 있어요! 🎈</p>
+                <div className="w-full lg:w-1/2 space-y-8 text-center lg:text-left">
+                  <div className="space-y-4">
+                    <h3 className="text-3xl font-black text-gray-900 leading-tight">메타버스 교실 입장하기</h3>
+                    <p className="text-lg text-gray-500 leading-relaxed">
+                      원어민 선생님과 친구들이 기다리고 있는<br />
+                      신비로운 메타버스 북클럽 공간으로 초대합니다! 🎈
+                    </p>
                   </div>
                   <a 
                     href="https://zep.us/play/6PE6n5" 
                     target="_blank" 
                     rel="noreferrer"
-                    className="w-full lg:w-auto inline-flex items-center justify-center gap-4 px-10 py-8 bg-[#FFD700] text-[#7C3AED] rounded-[2.5rem] text-3xl font-black shadow-[0_20px_50px_rgba(255,215,0,0.3)] hover:scale-105 hover:shadow-[0_20px_60px_rgba(255,215,0,0.5)] transition-all active:scale-95"
+                    className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-violet-600 text-white rounded-2xl text-xl font-black shadow-xl shadow-violet-200 hover:bg-violet-700 hover:translate-y-[-2px] transition-all active:translate-y-0"
                   >
-                    <Rocket size={40} className="animate-bounce" /> ZEP 입장하기 <ChevronRight size={40} />
+                    <Rocket size={24} className="animate-bounce" /> ZEP 입장하기 <ChevronRight size={24} />
                   </a>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {[
-                  { id: '1WVPAXoTNwA', title: '체험 영상 #1', caption: '실시간 원어민 대화 체험' },
-                  { id: 'uZkom_f1-N4', title: '체험 영상 #2', caption: '그룹 북클럽 활동' },
+                  { id: '1WVPAXoTNwA', title: '체험 영상 #1' },
+                  { id: 'uZkom_f1-N4', title: '체험 영상 #2' },
                 ].map((video, idx) => (
-                  <div key={idx} className="bg-white p-10 rounded-[4rem] shadow-2xl border-4 border-[#7C3AED]/10 flex flex-col">
-                    <h3 className="text-3xl font-bold mb-8 flex items-center gap-4">
-                      <PlayCircle className="text-[#7C3AED]" size={36} /> {video.title}
+                  <div key={idx} className="card-premium p-6 space-y-6">
+                    <h3 className="text-xl font-black text-gray-900 flex items-center gap-3">
+                      <PlayCircle className="text-violet-600" size={24} /> {video.title}
                     </h3>
-                    <div className="aspect-video w-full rounded-3xl shadow-xl overflow-hidden bg-black relative group">
+                    <div className="aspect-video w-full rounded-xl shadow-inner overflow-hidden bg-black border border-gray-100">
                       <iframe 
                         className="w-full h-full"
-                        src={`https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&loop=1&playlist=${video.id}`}
-                        title={`YouTube video player ${idx + 1}`}
+                        src={`https://www.youtube.com/embed/${video.id}?autoplay=1&mute=1&loop=1&playlist=${video.id}&rel=0`}
+                        title={video.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
                       ></iframe>
@@ -532,14 +558,22 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="text-center md:text-left">
-              <h3 className="title-font text-2xl font-bold text-[#FFD700] mb-2">2026 1학기 원어민과 함께하는 북클럽</h3>
+      <footer className="bg-white border-t border-gray-100 py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-12">
+            <div className="text-center md:text-left space-y-4">
+              <div className="flex items-center justify-center md:justify-start gap-3">
+                <img 
+                  src="https://i.imgur.com/OYDYlXa.png" 
+                  alt="경북교육청 로고" 
+                  className="h-8 object-contain grayscale opacity-50"
+                  referrerPolicy="no-referrer"
+                />
+                <h3 className="text-lg font-black text-gray-400">2026 1학기 원어민 북클럽</h3>
+              </div>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+          <div className="mt-16 pt-8 border-t border-gray-50 text-center text-gray-300 text-xs font-medium">
             © 2026 Gyeongsangbuk-do Office of Education. All rights reserved.
           </div>
         </div>
@@ -547,13 +581,22 @@ export default function App() {
 
       {/* Floating Action Button (Scroll to Top) */}
       <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-8 right-8 w-14 h-14 bg-[#7C3AED] text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform z-40"
+        className="fixed bottom-8 right-8 w-14 h-14 bg-white text-violet-600 rounded-2xl shadow-2xl border border-gray-100 flex items-center justify-center hover:bg-violet-50 transition-all z-40 active:scale-90"
       >
         <ChevronRight size={24} className="-rotate-90" />
       </motion.button>
     </div>
   );
 }
+
+/**
+ * [모바일 한글 짤림 방지 및 가독성 최적화 설명]
+ * 1. break-keep: 한글 단어가 중간에 끊기지 않고 어절 단위로 줄바꿈되도록 최상위 div에 적용하였습니다.
+ * 2. tracking-tight: 폰트 자간을 미세하게 좁혀 가독성을 높였습니다.
+ * 3. selection:bg-violet-100: 텍스트 드래그 시 브랜드 컬러와 어울리는 색상을 적용하여 프리미엄 느낌을 주었습니다.
+ * 4. leading-relaxed: 줄 간격을 충분히 주어 모바일 좁은 화면에서도 텍스트가 답답해 보이지 않게 설계했습니다.
+ * 5. text-sm md:text-base: 화면 크기에 따라 텍스트 크기가 유동적으로 변하도록 반응형 클래스를 적극 활용했습니다.
+ */
