@@ -75,7 +75,7 @@ export default function App() {
               </div>
               <div className="flex flex-col">
                 <span className="text-base md:text-lg font-bold text-gray-900 tracking-tight">
-                  경북교육청 원어민 북클럽
+                  원어민과 함께하는 북클럽
                 </span>
               </div>
             </div>
@@ -229,42 +229,40 @@ export default function App() {
                         </p>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {[
-                          { icon: Calendar, label: "신청 기간", value: "2026. 05. 01 ~ 05. 08", color: "bg-blue-50 text-blue-600" },
-                          { icon: BookOpen, label: "교육 기간", value: "2026. 05. 26 ~ 06. 11", color: "bg-violet-50 text-violet-600" },
-                          { icon: UserPlus, label: "모집 인원", value: "클래스당 13명", color: "bg-emerald-50 text-emerald-600" },
-                          { icon: Users, label: "교육 대상", value: "초등학생 및 중학생", color: "bg-orange-50 text-orange-600" },
-                        ].map((info, idx) => (
-                          <div key={idx} className="p-6 rounded-2xl bg-gray-50/50 border border-gray-100 space-y-3">
-                            <div className={`w-10 h-10 rounded-xl ${info.color} flex items-center justify-center`}>
-                              <info.icon size={20} />
+                      <div className="card-premium p-8 md:p-10">
+                        <div className="space-y-6">
+                          {[
+                            { label: "신청 기간", value: "2026/05/01 ~ 2026/05/08" },
+                            { label: "교육 기간", value: "2026/05/26 ~ 2026/06/11" },
+                            { label: "수업 시간", value: "[A반] 19:00 ~ 19:40 (40분)" },
+                            { label: "수업 시간", value: "[B반] 19:50 ~ 20:30 (40분)" },
+                            { label: "모집 인원", value: "13 명" },
+                          ].map((info, idx) => (
+                            <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-4 border-b border-gray-50 last:border-0">
+                              <span className="text-gray-400 font-bold text-sm sm:text-base">{info.label}</span>
+                              <span className="text-gray-900 font-black text-base sm:text-lg">{info.value}</span>
                             </div>
-                            <div>
-                              <p className="text-sm font-bold text-gray-400 mb-1">{info.label}</p>
-                              <p className="text-base font-bold text-gray-900">{info.value}</p>
-                            </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
 
-                      <button onClick={() => setCurrentPage('registration')} className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2">
-                        수강 신청하러 가기 <ChevronRight size={18} />
+                      <button onClick={() => setCurrentPage('registration')} className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 text-lg py-4">
+                        지금 바로 수강 신청하러 가기 <ChevronRight size={20} />
                       </button>
                     </div>
 
                     <div className="relative">
-                      <div className="absolute -inset-4 bg-violet-100 rounded-[3rem] rotate-3 -z-10"></div>
+                      <div className="absolute -inset-4 bg-violet-50 rounded-[3rem] -z-10"></div>
                       <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white"
+                        className="rounded-2xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3]"
                       >
                         <img 
-                          src="https://i.imgur.com/GPxdL1d.png" 
+                          src="https://i.imgur.com/lvWtYXq.png" 
                           alt="북클럽 소개 이미지" 
-                          className="w-full h-auto object-cover"
+                          className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         />
                       </motion.div>
@@ -461,16 +459,22 @@ export default function App() {
                             <PlayCircle size={16} /> 미리보기
                           </a>
                           <div className="grid grid-cols-2 gap-2">
-                            <button className={`py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 ${
-                              item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
-                            }`}>
-                              A반 신청
-                            </button>
-                            <button className={`py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 ${
-                              item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
-                            }`}>
-                              B반 신청
-                            </button>
+                            <div className="flex flex-col items-center gap-1.5">
+                              <button className={`w-full py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 ${
+                                item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
+                              }`}>
+                                A반 신청
+                              </button>
+                              <span className="text-[10px] sm:text-xs font-medium text-gray-400">수업시간 19:00~19:40</span>
+                            </div>
+                            <div className="flex flex-col items-center gap-1.5">
+                              <button className={`w-full py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 ${
+                                item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
+                              }`}>
+                                B반 신청
+                              </button>
+                              <span className="text-[10px] sm:text-xs font-medium text-gray-400">수업시간 19:50~20:30</span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -569,7 +573,7 @@ export default function App() {
                   className="h-8 object-contain grayscale opacity-50"
                   referrerPolicy="no-referrer"
                 />
-                <h3 className="text-lg font-black text-gray-400">2026 1학기 원어민 북클럽</h3>
+                <h3 className="text-lg font-black text-gray-400">원어민과 함께하는 북클럽</h3>
               </div>
             </div>
           </div>
