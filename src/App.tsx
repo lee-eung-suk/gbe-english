@@ -230,17 +230,23 @@ export default function App() {
                       </div>
 
                       <div className="card-premium p-8 md:p-10">
-                        <div className="space-y-6">
+                        <div className="space-y-2">
                           {[
+                            { label: "대상", value: "초 4~6학년(12개반), 중 1~3학년(6개반)" },
                             { label: "신청 기간", value: "2026/05/01 ~ 2026/05/08" },
-                            { label: "교육 기간", value: "2026/05/26 ~ 2026/06/11" },
-                            { label: "수업 시간", value: "[A반] 19:00 ~ 19:40 (40분)" },
-                            { label: "수업 시간", value: "[B반] 19:50 ~ 20:30 (40분)" },
-                            { label: "모집 인원", value: "13 명" },
+                            { label: "교육 기간", value: "2026/05/26 ~ 2026/06/11 (3주간, 주 4회, 총 12회)" },
+                            { label: "수업 시간", value: ["[A반] 19:00 ~ 19:40 (40분)", "[B반] 19:50 ~ 20:30 (40분)"] },
+                            { label: "모집 인원", value: "클래스당 13 명" },
                           ].map((info, idx) => (
-                            <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-4 border-b border-gray-50 last:border-0">
-                              <span className="text-gray-400 font-bold text-sm sm:text-base">{info.label}</span>
-                              <span className="text-gray-900 font-black text-base sm:text-lg">{info.value}</span>
+                            <div key={idx} className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 py-5 border-b border-gray-50 last:border-0 break-keep">
+                              <span className="text-gray-400 font-bold text-sm sm:text-base shrink-0 sm:pt-0.5">{info.label}</span>
+                              <div className="text-gray-900 font-black text-base sm:text-lg text-left sm:text-right leading-tight max-w-md flex flex-col gap-1 sm:items-end">
+                                {Array.isArray(info.value) ? (
+                                  info.value.map((v, i) => <span key={i} className="block">{v}</span>)
+                                ) : (
+                                  <span>{info.value}</span>
+                                )}
+                              </div>
                             </div>
                           ))}
                         </div>
