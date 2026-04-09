@@ -162,7 +162,7 @@ export const CLASSES_DATA: BookItem[] = [
     level: '하',
     target: '중등 5',
     title: "Aesop's Fables",
-    image: 'https://i.imgur.com/OcBtvWR.png',
+    image: 'https://i.imgur.com/yB0GR1e.png',
     previewUrl: 'https://www.youtube.com/watch?v=jLJIBUGbAu4'
   },
   {
