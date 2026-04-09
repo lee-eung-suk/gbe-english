@@ -202,14 +202,17 @@ export default function App() {
                     transition={{ delay: 0.5 }}
                     className="flex flex-col sm:flex-row justify-center gap-4"
                   >
-                    <button onClick={() => setCurrentPage('registration')} className="btn-primary text-lg">
+                    <button 
+                      onClick={() => setCurrentPage('registration')} 
+                      className="bg-gray-900 text-white px-8 py-4 rounded-full font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 text-lg"
+                    >
                       지금 바로 신청하기
                     </button>
                     <a 
                       href="https://zep.us/play/6PE6n5" 
                       target="_blank" 
                       rel="noreferrer"
-                      className="btn-secondary text-lg flex items-center justify-center gap-2"
+                      className="bg-white text-gray-900 border border-gray-200 px-8 py-4 rounded-full font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 text-lg flex items-center justify-center gap-2"
                     >
                       ZEP 체험하기 <ExternalLink size={18} />
                     </a>
@@ -235,7 +238,7 @@ export default function App() {
                       <div className="card-premium p-8 md:p-10">
                         <div className="space-y-2">
                           {[
-                            { label: "대상", value: "초 4~6학년(24개반), 중 1~3학년(12개반)" },
+                            { label: "대상", value: ["초 4~6학년(24개반)", "중 1~3학년(12개반)"] },
                             { label: "신청 기간", value: "2026/05/01 ~ 2026/05/08" },
                             { label: "교육 기간", value: "2026/05/26 ~ 2026/06/11 (3주간, 주 4회, 총 12회)" },
                             { label: "수업 시간", value: ["[A반] 19:00 ~ 19:40 (40분)", "[B반] 19:50 ~ 20:30 (40분)"] },
@@ -243,7 +246,7 @@ export default function App() {
                           ].map((info, idx) => (
                             <div key={idx} className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 py-5 border-b border-gray-50 last:border-0 break-keep">
                               <span className="text-gray-400 font-bold text-sm sm:text-base shrink-0 sm:pt-0.5">{info.label}</span>
-                              <div className="text-gray-900 font-black text-base sm:text-lg text-left sm:text-right leading-tight max-w-md flex flex-col gap-1 sm:items-end">
+                              <div className={`text-gray-900 font-black text-base sm:text-lg text-left sm:text-right leading-tight max-w-md break-keep ${info.label === "대상" ? "flex flex-col sm:flex-row sm:gap-2" : "flex flex-col gap-1 sm:items-end"}`}>
                                 {Array.isArray(info.value) ? (
                                   info.value.map((v, i) => <span key={i} className="block">{v}</span>)
                                 ) : (
@@ -255,7 +258,10 @@ export default function App() {
                         </div>
                       </div>
 
-                      <button onClick={() => setCurrentPage('registration')} className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 text-lg py-4">
+                      <button 
+                        onClick={() => setCurrentPage('registration')} 
+                        className="bg-violet-600 text-white px-10 py-5 rounded-full font-bold transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 w-full sm:w-auto flex items-center justify-center gap-2 text-lg"
+                      >
                         지금 바로 수강 신청하러 가기 <ChevronRight size={20} />
                       </button>
                     </div>
