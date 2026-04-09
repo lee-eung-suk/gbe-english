@@ -26,7 +26,10 @@ import {
   Sparkles,
   Music,
   Palette,
-  Lightbulb
+  Lightbulb,
+  Headset,
+  Monitor,
+  Network
 } from 'lucide-react';
 import { CLASSES_DATA, NOTICES, BookItem } from './constants';
 
@@ -326,8 +329,7 @@ export default function App() {
                   {
                     title: "수강신청 결과 안내",
                     content: [
-                      { label: "안내문자 발송", text: "수강 신청 완료된 다음날 문자로 개별 통보" },
-                      { label: "문자 발송 대상", text: "수강 대상 학생 및 보호자" }
+                      { label: "안내 시기", text: "수강신청 종료 후 일괄 통보" }
                     ]
                   },
                   {
@@ -342,20 +344,62 @@ export default function App() {
                   {
                     title: "수업 실시 후 '만족도 조사' 참가 협조",
                     content: []
+                  },
+                  {
+                    title: "원활한 온라인 수업을 위한 필수 준비물 안내",
+                    subtitle: "수업의 질을 결정하는 3가지 필수 체크리스트",
+                    content: [
+                      { 
+                        label: "마이크 기능이 있는 '헤드셋'", 
+                        text: "원어민 선생님과의 생생한 소통과 집중력 향상을 위해 반드시 준비해 주세요.",
+                        icon: Headset,
+                        color: "text-blue-500"
+                      },
+                      { 
+                        label: "데스크탑+웹캠 또는 노트북", 
+                        text: "메타버스 수업 특성상 화면 공유와 실시간 참여를 위한 적절한 사양의 기기가 필요합니다.",
+                        icon: Monitor,
+                        color: "text-orange-500"
+                      },
+                      { 
+                        label: "안정적인 '유선 인터넷' 환경", 
+                        text: "와이파이(Wi-Fi) 접속 시 수업이 끊길 수 있으므로, 가급적 랜선을 연결한 유선 환경을 권장합니다.",
+                        icon: Network,
+                        color: "text-green-600"
+                      }
+                    ]
                   }
                 ].map((notice, idx) => (
                   <div key={idx} className="card-premium p-8 md:p-10 flex gap-6 items-start">
                     <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-violet-600 text-white flex items-center justify-center text-xl font-black shadow-lg shadow-violet-200">
                       {idx + 1}
                     </div>
-                    <div className="space-y-4">
-                      <h3 className="text-xl md:text-2xl font-black text-gray-900">{notice.title}</h3>
+                    <div className="space-y-6 w-full">
+                      <div className="space-y-1">
+                        <h3 className="text-xl md:text-2xl font-black text-gray-900">{notice.title}</h3>
+                        {notice.subtitle && (
+                          <p className="text-violet-600 font-bold text-sm md:text-base">{notice.subtitle}</p>
+                        )}
+                      </div>
                       {notice.content.length > 0 && (
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                           {notice.content.map((item, i) => (
-                            <div key={i} className="flex flex-col sm:flex-row sm:gap-3 text-base md:text-lg">
-                              <span className="font-bold text-gray-900 min-w-[140px]">{item.label}:</span>
-                              <span className="text-gray-600">{item.text}</span>
+                            <div key={i} className={`flex flex-col break-keep gap-2 ${item.icon ? 'md:grid md:grid-cols-[48px_220px_1fr] md:items-center md:gap-6' : 'sm:flex-row sm:gap-3'} text-base md:text-lg`}>
+                              {item.icon ? (
+                                <>
+                                  <div className={`flex items-center gap-3 ${item.color}`}>
+                                    <item.icon size={32} strokeWidth={2.5} className="shrink-0" />
+                                    <span className="font-bold text-gray-900 md:hidden">{item.label}</span>
+                                  </div>
+                                  <span className="hidden md:block font-bold text-gray-900 leading-tight">{item.label}</span>
+                                  <span className="text-gray-600 leading-relaxed">{item.text}</span>
+                                </>
+                              ) : (
+                                <>
+                                  <span className="font-bold text-gray-900 min-w-[140px]">{item.label}:</span>
+                                  <span className="text-gray-600">{item.text}</span>
+                                </>
+                              )}
                             </div>
                           ))}
                         </div>
