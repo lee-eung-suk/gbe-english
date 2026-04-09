@@ -235,7 +235,7 @@ export default function App() {
                       <div className="card-premium p-8 md:p-10">
                         <div className="space-y-2">
                           {[
-                            { label: "대상", value: "초 4~6학년(12개반), 중 1~3학년(6개반)" },
+                            { label: "대상", value: "초 4~6학년(24개반), 중 1~3학년(12개반)" },
                             { label: "신청 기간", value: "2026/05/01 ~ 2026/05/08" },
                             { label: "교육 기간", value: "2026/05/26 ~ 2026/06/11 (3주간, 주 4회, 총 12회)" },
                             { label: "수업 시간", value: ["[A반] 19:00 ~ 19:40 (40분)", "[B반] 19:50 ~ 20:30 (40분)"] },

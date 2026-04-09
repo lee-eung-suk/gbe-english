@@ -6,23 +6,23 @@
 }
 
 body {
-  @apply bg-[#F9FAFB] text-gray-900 antialiased;
+  @apply bg-[#F5F5F7] text-[#1D1D1F] antialiased;
 }
 
 .break-keep {
   word-break: keep-all;
 }
 
-.btn-primary {
-  @apply bg-[#5B21B6] hover:bg-[#4C1D95] text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md active:scale-[0.98];
+.apple-btn-primary {
+  @apply bg-[#1D1D1F] hover:opacity-80 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 active:scale-[0.98];
 }
 
-.btn-secondary {
-  @apply bg-white hover:bg-gray-50 text-[#5B21B6] border border-[#DDD6FE] font-semibold py-3 px-8 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md active:scale-[0.98];
+.apple-btn-secondary {
+  @apply bg-transparent hover:underline text-[#0066CC] font-medium py-2 px-4 transition-all duration-300 flex items-center gap-1;
 }
 
-.card-premium {
-  @apply bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300;
+.apple-card {
+  @apply bg-white rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100/50 transition-all duration-500;
 }
 
 .no-scrollbar::-webkit-scrollbar {
