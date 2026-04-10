@@ -516,19 +516,29 @@ export default function App() {
                           </a>
                           <div className="grid grid-cols-2 gap-2">
                             <div className="flex flex-col items-center gap-1.5">
-                              <button className={`w-full py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 ${
-                                item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
-                              }`}>
+                              <a 
+                                href={item.registrationUrlA}
+                                target="_blank"
+                                rel="noreferrer"
+                                className={`w-full py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 text-center ${
+                                  item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
+                                }`}
+                              >
                                 A반 신청
-                              </button>
+                              </a>
                               <span className="text-[10px] sm:text-xs font-medium text-gray-400">수업시간 19:00~19:40</span>
                             </div>
                             <div className="flex flex-col items-center gap-1.5">
-                              <button className={`w-full py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 ${
-                                item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
-                              }`}>
+                              <a 
+                                href={item.registrationUrlB}
+                                target="_blank"
+                                rel="noreferrer"
+                                className={`w-full py-3 rounded-xl text-white text-sm font-bold transition-all shadow-sm active:scale-95 text-center ${
+                                  item.level === '상' ? 'bg-rose-500 hover:bg-rose-600' : item.level === '중' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-emerald-500 hover:bg-emerald-600'
+                                }`}
+                              >
                                 B반 신청
-                              </button>
+                              </a>
                               <span className="text-[10px] sm:text-xs font-medium text-gray-400">수업시간 19:50~20:30</span>
                             </div>
                           </div>
